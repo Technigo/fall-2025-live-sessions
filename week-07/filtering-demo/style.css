@@ -1,0 +1,33 @@
+  body {
+    font-family: system-ui, sans-serif;
+    margin: 2rem
+  }
+
+  .controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem
+  }
+
+  .card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 0.75rem
+  }
+
+  .title {
+    font-weight: 600;
+    margin: 0 0 0.25rem 0
+  }
+
+  .meta {
+    font-size: 0.9rem;
+    opacity: 0.8
+  }

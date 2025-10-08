@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spoonacular Filters Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>Recipes — filtering by boolean, array, and string</h1>
+
+  <div class="controls">
+    <label for="filter">Filter</label>
+    <select id="filter">
+      <option value="all">Show all</option>
+      <option value="vegetarian">Vegetarian (boolean)</option>
+      <option value="cuisineMexican">Cuisine includes “Mexican” (array)</option>
+      <option value="titleGuacamole">Title contains “Guacamole” (string)</option>
+    </select>
+    <span id="count" aria-live="polite"></span>
+  </div>
+
+  <div id="grid" class="grid"></div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
