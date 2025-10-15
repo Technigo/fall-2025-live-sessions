@@ -8,10 +8,20 @@ const weatherURL = `https://opendata-download-metfcst.smhi.se/api/category/snow1
 
 interface currentWeatherData {
   airTemp: number,
-  condition: string
+  condition: number
 }
 
-
+const weatherSymbols: { [key: number]: string } = {
+  1: 'Clear sky',
+  2: 'Nearly clear sky',
+  3: 'Variable cloudiness',
+  4: 'Halfclear sky',
+  5: 'Cloudy sky',
+  6: 'Overcast',
+  7: 'Fog',
+  8: 'Light rain showers',
+  // …continue with the rest
+}
 
 let currentWeather: currentWeatherData
 
@@ -33,7 +43,13 @@ const fetchWeather = async () => {
       condition: data.timeSeries[0].data.symbol_code
     }
 
+    // a way to get a hold of the acutaly mening of the weather symbols (found in the docs)
+    const actualCondition = weatherSymbols[currentWeather.condition]
+
     console.log('airTemp', currentWeather.airTemp)
+    console.log('condition', currentWeather.condition)
+    console.log('actualCondition', actualCondition)
+
 
   } catch (error) {
     console.log(`caught an error, ${error}`)
