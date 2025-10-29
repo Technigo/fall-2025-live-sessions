@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,7 +7,129 @@
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-    <p>This is the starting point.</p>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+      <h1>Website feedback</h1>
+      <nav role="navigation" aria-label="Main navigation">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#user-info">Your information</a>
+          </li>
+          <li>
+            <a href="#feedback">Feedback form</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section id="introduction">
+        <h2>Introduction</h2>
+        <p>
+          We value your feedback! Help us improve our website accessibility.
+        </p>
+        <div class="hero-images">
+          <img src="assets/cat.webp" alt="" class="decorative-image" />
+
+          <img
+            src="assets/accessibility-image.png"
+            alt="Image showing various accessibility symbols"
+            class="info-image"
+          />
+        </div>
+      </section>
+
+      <section id="user-info">
+        <h2>Your information</h2>
+        <form id="user-info-form">
+          <div class="form-control">
+            <label for="name">Name:</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              aria-required="true"
+            />
+          </div>
+          <div class="form-control">
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              requred
+              aria-required="true"
+            />
+          </div>
+          <div class="form-control">
+            <button type="submit">Continue to feedback</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="feedback" hidden>
+        <h2>Share your experience</h2>
+        <form id="feedback-form">
+          <fieldset>
+            <legend>Website navigation experience</legend>
+            <div class="radio-group">
+              <label for="nav-easy">Easy to navigate</label>
+              <input
+                type="radio"
+                name="navigation"
+                id="nav-easy"
+                value="easy"
+              />
+            </div>
+            <div class="radio-group">
+              <label for="nav-difficult">Difficult to navigate </label>
+              <input
+                type="radio"
+                name="navigation"
+                id="nav-difficult"
+                value="difficult"
+              />
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Content readability</legend>
+            <div class="radio-group">
+              <input
+                type="radio"
+                name="readability"
+                id="read-clear"
+                value="clear"
+              />
+              <label for="read-clear">Content is clear and easy to read</label>
+            </div>
+            <div class="radio-group">
+              <input
+                type="radio"
+                name="readability"
+                id="read-unclear"
+                value="unclear"
+              />
+              <label for="read-unclear"
+                >Content was difficult to read and understand</label
+              >
+            </div>
+          </fieldset>
+          <button type="submit">Submit feedback</button>
+        </form>
+      </section>
+
+      <section id="results" hidden>
+        <h2>Thank you</h2>
+        <div id="results-content"></div>
+      </section>
+    </main>
+
     <script src="js/main.js"></script>
   </body>
 </html>
