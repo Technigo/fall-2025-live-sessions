@@ -1,10 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About</title>
     <link rel="stylesheet" href="css/styles.css" />
   </head>
-  <body></body>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+      <h1>Website feedback</h1>
+      <nav role="navigation" aria-label="Main navigation">
+        <ul>
+          <li>
+            <a href="index.html">Home</a>
+          </li>
+          <li>
+            <a href="about.html">About</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <div class="accordion-container">
+        <h2>Accessibility Features</h2>
+        <div class="accordion">
+          <div class="accordion-item">
+            <h3>
+              <button
+                class="accordion-button"
+                aria-expanded="false"
+                aria-controls="content-1"
+              >
+                Screen reader compatibility
+                <span
+                  class="accordion-icon"
+                  aria-label="Accordion button"
+                ></span>
+              </button>
+            </h3>
+            <div id="content-1" class="accordion-content" hidden>
+              <p>Our website is fully compatible with screen readers.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3>
+              <button
+                class="accordion-button"
+                aria-expanded="false"
+                aria-controls="content-2"
+              >
+                Keyboard navigation
+                <span
+                  class="accordion-icon"
+                  aria-label="Accordion button"
+                ></span>
+              </button>
+            </h3>
+            <div id="content-2" class="accordion-content" hidden>
+              <p>All interactive elements are accessible by keyboard</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="js/accordion.js"></script>
+  </body>
 </html>

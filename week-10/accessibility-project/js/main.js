@@ -3,11 +3,75 @@ document.addEventListener('DOMContentLoaded', () => {
   let userName = '';
   const feedbackSection = document.getElementById('feedback');
 
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const nameError = document.getElementById('name-error');
+  const emailError = document.getElementById('email-error');
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function showError(input, errorElement, message) {
+    input.setAttribute('aria-invalid', 'true');
+    errorElement.textContent = message;
+    errorElement.hidden = false;
+  }
+
+  function clearError(input, errorElement) {
+    input.removeAttribute('aria-invalid');
+    errorElement.textContent = '';
+    errorElement.hidden = true;
+  }
+
+  nameInput.addEventListener('input', () => {
+    if (nameInput.value.trim()) {
+      clearError(nameInput, nameError);
+    }
+  });
+
+  emailInput.addEventListener('input', () => {
+    if (emailInput.value.trim()) {
+      if (isValidEmail(emailInput.value)) {
+        clearError(emailInput, emailError);
+      }
+    }
+  });
+
   userInfoForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    userName = document.getElementById('name').value.trim();
-    feedbackSection.hidden = false;
-    feedbackSection.scrollIntoView({ behavior: 'smooth' });
+    let isValid = true;
+
+    // Validate name
+    if (!nameInput.value.trim()) {
+      showError(nameInput, nameError, 'Please enter your name');
+      isValid = false;
+      nameInput.focus();
+    } else {
+      clearError(nameInput, nameError);
+    }
+
+    if (!emailInput.value.trim()) {
+      showError(emailInput, emailError, 'Please enter your email address');
+      isValid = false;
+      if (!nameError.textContent) {
+        emailInput.focus();
+      }
+    } else if (!isValidEmail(emailInput.value)) {
+      showError(emailInput, emailError, 'Please enter a valid email address');
+      isValid = false;
+      if (!nameError.textContent) {
+        emailInput.focus();
+      }
+    } else {
+      clearError(emailInput, emailError);
+    }
+
+    if (isValid) {
+      userName = document.getElementById('name').value.trim();
+      feedbackSection.hidden = false;
+      feedbackSection.scrollIntoView({ behavior: 'smooth' });
+    }
   });
 
   const feedbackForm = document.getElementById('feedback-form');
