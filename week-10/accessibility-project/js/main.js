@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const emailInput = document.getElementById('email');
   const nameError = document.getElementById('name-error');
   const emailError = document.getElementById('email-error');
+  const announcer = document.getElementById('announcer');
 
   function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -22,6 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
     input.removeAttribute('aria-invalid');
     errorElement.textContent = '';
     errorElement.hidden = true;
+  }
+
+  function announce(message) {
+    announcer.textContent = '';
+
+    setTimeout(() => {
+      announcer.textContent = message;
+    }, 100);
   }
 
   nameInput.addEventListener('input', () => {
@@ -71,12 +80,33 @@ document.addEventListener('DOMContentLoaded', () => {
       userName = document.getElementById('name').value.trim();
       feedbackSection.hidden = false;
       feedbackSection.scrollIntoView({ behavior: 'smooth' });
+      announce('Moved to feedback form section');
     }
   });
 
   const feedbackForm = document.getElementById('feedback-form');
   const resultsSection = document.getElementById('results');
   const resultsContent = document.getElementById('results-content');
+  const progressFill = document.querySelector('.progress-fill');
+  const progressText = document.querySelector('.progress-text');
+  let answeredQuestions = new Set();
+
+  function updateProgress() {
+    const totalQuestions = 2;
+    const answeredCount = answeredQuestions.size;
+    const percentage = (answeredCount / totalQuestions) * 100;
+
+    progressFill.style.width = `${percentage}%`;
+    progressText.textContent = `${answeredCount} of ${totalQuestions} questions answered`;
+  }
+
+  feedbackForm.querySelectorAll('input[type="radio"]').forEach((radio) => {
+    radio.addEventListener('change', () => {
+      const questionName = radio.name;
+      answeredQuestions.add(questionName);
+      updateProgress();
+    });
+  });
 
   feedbackForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -104,5 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     resultsSection.setAttribute('tabindex', '-1');
     resultsSection.focus();
+    announce('Feedback submitted. Your results are now displayed');
   });
 });

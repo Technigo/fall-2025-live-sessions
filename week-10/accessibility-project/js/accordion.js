@@ -9,6 +9,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const targetId = button.getAttribute('aria-controls');
     const targetPanel = document.getElementById(targetId);
 
+    button.addEventListener('keydown', (event) => {
+      switch (event.key) {
+        case 'ArrowDown':
+        case 'ArrowRight':
+          event.preventDefault();
+          const nextButton = buttons[(index + 1) % buttons.length];
+          nextButton.focus();
+          break;
+        case 'ArrowUp':
+        case 'ArrowLeft':
+          event.preventDefault();
+          const prevButton =
+            buttons[(index - 1 + buttons.length) % buttons.length];
+          prevButton.focus();
+          break;
+        case 'Home':
+          event.preventDefault();
+          buttons[0].focus();
+          break;
+        case 'End':
+          event.preventDefault();
+          buttons[buttons.length - 1].focus();
+          break;
+        case ' ':
+        case 'Enter':
+          event.preventDefault();
+          togglePanel(button, targetPanel);
+          break;
+      }
+    });
+
     button.addEventListener('click', () => {
       togglePanel(button, targetPanel);
     });
