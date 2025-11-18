@@ -1,0 +1,12 @@
+{
+  "pokemons": [
+    {
+      "name": "Bulbasaur",
+      "type": "Grass/Poison"
+    },
+    {
+      "name": "Charmander",
+      "type": "Fire"
+    }
+  ]
+}
