@@ -1,0 +1,109 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+.list {
+  list-style: none;
+}
+
+.cards {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-bottom: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: #bbb 0px 3px 8px;
+  justify-content: space-between;
+}
+
+.card-primary {
+  background-color: #8CFFBA;
+}
+
+.card-secondary {
+  background-color: #A6CFE2;
+}
+
+.card-tertiary {
+  background-color: #EEB200;
+}
+
+.card-heading {
+  display: flex;
+  height: 80px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.card-description {
+  font-size: 28px;
+  font-style: italic;
+}
+
+.card-inner {
+  display: flex;
+  padding: 16px;
+  background-color: rgba(255, 255, 255, 0.7);
+  height: 100%;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+.card-inner>*+* {
+  margin-top: 8px;
+}
+
+.card-button {
+  width: 100%;
+  font-size: 20px;
+  box-shadow: #bbb 0px 3px 8px;
+}
+
+.card-icon {
+  font-size: inherit;
+}
+
+.typography {
+  margin: 0;
+}
+
+.typography-h1 {
+  font-size: 50px;
+  font-weight: 400;
+}
+
+.typography-h2 {
+  font-size: 40px;
+  font-weight: 400;
+}
+
+.typography-h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.typography-body {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
