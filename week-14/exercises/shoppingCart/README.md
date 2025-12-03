@@ -1,4 +1,6 @@
-# Technigo React Vite Boilerplate
+# Shopping Cart exercise
+
+## Technigo React Vite Boilerplate
 This boilerplate is designed to give you a head start in your React projects, with a focus on understanding the structure and components.
 
 ## Getting Started
