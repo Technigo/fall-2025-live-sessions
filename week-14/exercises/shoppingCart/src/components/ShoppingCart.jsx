@@ -14,11 +14,27 @@ export const ShoppingCart = () => {
   // TODO: Create state for cart items
   // Hint: Could be an array of { id, name, price, quantity }
   // Or an object like { [id]: quantity }
+  const [cart, setCart] = useState([]);
 
   const addToCart = (product) => {
     // TODO: Add product to cart
     // If already in cart, increase quantity
     // If not, add with quantity 1
+    setCart((prev) => {
+      const existingItem = prev.find((item) => item.id === product.id);
+
+      if (existingItem) {
+        return prev.map((item) => {
+          if (item.id === product.id) {
+            return { ...item, quantity: item.quantity + 1 };
+          } else {
+            return item;
+          }
+        });
+      } else {
+        return [...prev, { ...product, quantity: 1 }];
+      }
+    });
   };
 
   const removeFromCart = (productId) => {
@@ -55,6 +71,45 @@ export const ShoppingCart = () => {
         {/*   - Quantity with +/- buttons */}
         {/*   - Item subtotal (price × quantity) */}
         {/*   - Remove button */}
+
+        {cart.length === 0 ? (
+          <p>Your cart is empty</p>
+        ) : (
+          <>
+            {cart.map((item) => (
+              <div key={item.id} className="cart">
+                <strong>{item.name}</strong>
+
+                <div className="cart-content">
+                  <button
+                    onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                  >
+                    -
+                  </button>
+
+                  <span>{item.quantity}</span>
+
+                  <button
+                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                  >
+                    +
+                  </button>
+
+                  <span className="cart-total">
+                    ${item.price * item.quantity}
+                  </span>
+
+                  <button
+                    onClick={() => removeFromCart(item.id)}
+                    className="cart-removeBtn"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            ))}
+          </>
+        )}
 
         <hr />
         <strong>Total: ${calculateTotal()}</strong>

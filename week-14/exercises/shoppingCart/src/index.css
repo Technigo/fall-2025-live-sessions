@@ -6,3 +6,21 @@
     display: flex;
     gap: 2rem;
 }
+
+.cart {
+    margin-bottom: 1rem;
+}
+
+.cart-total {
+    margin-left: 1rem;
+}
+
+.cart-removeBtn {
+    margin-left: 1rem;
+    color: red;
+}
+
+.cart-content {
+    display: flex;
+    gap: 0.5rem;
+}

@@ -3,6 +3,7 @@ export const Product = (props) => {
 
   const onClick = () => {
     // TODO: Implement onClick function
+    addToCart(product);
   };
 
   return (
