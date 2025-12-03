@@ -15,6 +15,8 @@ export const ShoppingCart = () => {
   // Hint: Could be an array of { id, name, price, quantity }
   // Or an object like { [id]: quantity }
   const [cart, setCart] = useState([]);
+  const [cartSent, setCartSent] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const addToCart = (product) => {
     // TODO: Add product to cart
@@ -27,28 +29,78 @@ export const ShoppingCart = () => {
         return prev.map((item) => {
           if (item.id === product.id) {
             return { ...item, quantity: item.quantity + 1 };
-          } else {
-            return item;
           }
+
+          return item;
         });
-      } else {
-        return [...prev, { ...product, quantity: 1 }];
       }
+
+      return [...prev, { ...product, quantity: 1 }];
     });
   };
 
   const removeFromCart = (productId) => {
     // TODO: Remove item completely from cart
+    setCart((prev) => prev.filter((item) => item.id !== productId));
   };
 
   const updateQuantity = (productId, newQuantity) => {
     // TODO: Update quantity for an item
     // If quantity becomes 0, remove the item
+    setCart((prevCart) => {
+      const newCart = [];
+
+      prevCart.forEach((product) => {
+        if (product.id === productId) {
+          if (newQuantity > 0) {
+            newCart.push({
+              ...product,
+              quantity: newQuantity,
+            });
+          }
+        } else {
+          newCart.push(product);
+        }
+      });
+
+      return newCart;
+    });
   };
 
   const calculateTotal = () => {
     // TODO: Calculate and return total price
-    return 0;
+    let total = 0;
+
+    cart.forEach((product) => {
+      total += product.price * product.quantity;
+    });
+
+    return total;
+  };
+
+  const handleClearCart = () => {
+    setCart([]);
+  };
+
+  const handleSubmit = async () => {
+    setLoading(true);
+
+    try {
+      const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
+        method: "POST",
+        body: JSON.stringify(cart),
+      });
+
+      if (!res.ok) {
+        throw Error("something went wrong when POSTing the cart");
+      }
+
+      setCartSent(true);
+    } catch (e) {
+      console.error("an error occured when submitting: ", e);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -76,8 +128,8 @@ export const ShoppingCart = () => {
           <p>Your cart is empty</p>
         ) : (
           <>
-            {cart.map((item) => (
-              <div key={item.id} className="cart">
+            {cart.map((item, index) => (
+              <div key={index} className="cart">
                 <strong>{item.name}</strong>
 
                 <div className="cart-content">
@@ -112,7 +164,24 @@ export const ShoppingCart = () => {
         )}
 
         <hr />
-        <strong>Total: ${calculateTotal()}</strong>
+
+        <footer className="cart-footer">
+          <strong>Total: ${calculateTotal()}</strong>
+
+          <button onClick={handleClearCart}>Clear cart</button>
+        </footer>
+
+        {!cartSent ? (
+          <button
+            className="submit-btn"
+            disabled={loading}
+            onClick={handleSubmit}
+          >
+            Submit
+          </button>
+        ) : (
+          <p>Cart submitted!</p>
+        )}
       </div>
     </div>
   );

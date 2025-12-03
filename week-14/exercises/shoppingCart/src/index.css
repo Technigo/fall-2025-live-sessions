@@ -24,3 +24,13 @@
     display: flex;
     gap: 0.5rem;
 }
+
+.cart-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.submit-btn {
+    margin-top: 1rem;
+}
