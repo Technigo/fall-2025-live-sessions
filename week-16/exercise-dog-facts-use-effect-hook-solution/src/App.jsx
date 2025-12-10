@@ -4,6 +4,7 @@ import { DogFact } from "./components/DogFact";
 
 export const App = () => {
   const [facts, setFacts] = useState([]);
+  const [visible, setVisible] = useState(true);
 
   // Hint: Initialize state for storing the dog fact
   // Hint: Define the API endpoint
@@ -32,9 +33,10 @@ export const App = () => {
   return (
     <div className="App">
       <h1>Facts about dogs</h1>
-      {facts.map((fact, index) => (
-        <DogFact fact={fact} key={index} />
-      ))}
+      <button onClick={() => setVisible((prev) => !prev)}>Toggle Facts</button>
+
+      {visible &&
+        facts.map((fact, index) => <DogFact fact={fact} key={index} />)}
     </div>
   );
 };
