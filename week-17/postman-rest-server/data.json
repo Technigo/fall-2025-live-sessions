@@ -1,0 +1,144 @@
+[
+  {
+    "id": 1,
+    "title": "Buy groceries",
+    "description": "Milk, eggs, bread, butter",
+    "completed": false,
+    "createdAt": "2025-12-10T06:55:17.401Z"
+  },
+  {
+    "id": 2,
+    "title": "Walk the dog",
+    "description": "Take Max for a 30-minute walk",
+    "completed": true,
+    "createdAt": "2025-12-10T06:55:17.402Z",
+    "updatedAt": "2025-12-10T07:36:24.091Z"
+  },
+  {
+    "id": 3,
+    "title": "Buy groceries",
+    "description": "Milk, eggs, bread, butter",
+    "completed": true,
+    "createdAt": "2025-12-10T06:55:17.402Z",
+    "updatedAt": "2025-12-16T09:16:15.760Z"
+  },
+  {
+    "id": 4,
+    "title": "Call mom",
+    "description": "Weekly check-in call",
+    "completed": false,
+    "createdAt": "2025-12-10T06:55:17.402Z"
+  },
+  {
+    "id": 5,
+    "title": "Schedule dentist appointment",
+    "description": "Annual checkup",
+    "completed": false,
+    "createdAt": "2025-12-10T06:55:17.402Z"
+  },
+  {
+    "id": 6,
+    "title": "Pay electricity bill",
+    "description": "Due by end of month",
+    "completed": true,
+    "createdAt": "2025-12-10T06:55:17.402Z"
+  },
+  {
+    "id": 7,
+    "title": "Clean garage",
+    "description": "Organize tools and donate old items",
+    "completed": false,
+    "createdAt": "2025-12-10T06:55:17.402Z"
+  },
+  {
+    "id": 8,
+    "title": "Read book chapter",
+    "description": "Chapter 5 of 'Clean Code'",
+    "completed": false,
+    "createdAt": "2025-12-10T06:55:17.402Z"
+  },
+  {
+    "id": 9,
+    "title": "Update resume",
+    "description": "Add recent project experience",
+    "completed": false,
+    "createdAt": "2025-12-10T06:55:17.402Z"
+  },
+  {
+    "id": 10,
+    "title": "Gym workout",
+    "description": "Leg day routine",
+    "completed": true,
+    "createdAt": "2025-12-10T06:55:17.402Z"
+  },
+  {
+    "id": 11,
+    "title": "Prepare presentation",
+    "description": "Slides for Monday meeting",
+    "completed": false,
+    "createdAt": "2025-12-10T06:55:17.402Z"
+  },
+  {
+    "id": 12,
+    "title": "Fix kitchen faucet",
+    "description": "Replace washer to stop leak",
+    "completed": false,
+    "createdAt": "2025-12-10T06:55:17.402Z"
+  },
+  {
+    "id": 13,
+    "title": "Order birthday gift",
+    "description": "Gift for Sarah's birthday",
+    "completed": true,
+    "createdAt": "2025-12-10T06:55:17.402Z"
+  },
+  {
+    "id": 14,
+    "title": "Backup laptop",
+    "description": "Full system backup to external drive",
+    "completed": false,
+    "createdAt": "2025-12-10T06:55:17.402Z"
+  },
+  {
+    "id": 15,
+    "title": "Learn TypeScript basics",
+    "description": "Complete online tutorial",
+    "completed": false,
+    "createdAt": "2025-12-10T06:55:17.402Z"
+  },
+  {
+    "id": 16,
+    "title": "Plan weekend trip",
+    "description": "Research hotels and activities",
+    "completed": false,
+    "createdAt": "2025-12-10T06:55:17.402Z"
+  },
+  {
+    "id": 17,
+    "title": "Renew car insurance",
+    "description": "Compare quotes and renew policy",
+    "completed": false,
+    "createdAt": "2025-12-10T06:55:17.402Z"
+  },
+  {
+    "id": 18,
+    "title": "Water plants",
+    "description": "Indoor and balcony plants",
+    "completed": true,
+    "createdAt": "2025-12-10T06:55:17.402Z"
+  },
+  {
+    "id": 19,
+    "title": "Review pull requests",
+    "description": "Check team's pending PRs",
+    "completed": false,
+    "createdAt": "2025-12-10T06:55:17.402Z"
+  },
+  {
+    "id": 20,
+    "title": "Meal prep Sunday",
+    "description": "Prepare lunches for the week",
+    "completed": false,
+    "createdAt": "2025-12-10T06:55:17.402Z"
+  }
+]
