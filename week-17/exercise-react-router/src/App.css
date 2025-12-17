@@ -1,0 +1,267 @@
+/* App Layout */
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+header .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Navigation */
+.main-nav ul {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.main-nav a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+/* Active NavLink styling - this class is automatically added by NavLink */
+.main-nav a.active {
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+  font-weight: 600;
+}
+
+/* Main content */
+main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Footer */
+footer {
+  background: #f8f9fa;
+  padding: 1rem 2rem;
+  text-align: center;
+  color: #666;
+  border-top: 1px solid #e9ecef;
+}
+
+/* Page styles */
+.page {
+  text-align: left;
+}
+
+.page h1 {
+  color: #333;
+  margin-bottom: 1rem;
+  border-bottom: 3px solid #667eea;
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+/* Exercise area highlight */
+.exercise-area {
+  background: #fff3cd;
+  border: 2px dashed #ffc107;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+/* Product list */
+.product-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.product-list li {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.product-list li:hover {
+  border-color: #667eea;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+}
+
+.product-list a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.product-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.product-price {
+  color: #667eea;
+  font-weight: bold;
+}
+
+/* Product detail */
+.product-detail .price {
+  font-size: 1.5rem;
+  color: #667eea;
+  font-weight: bold;
+}
+
+.product-detail .description {
+  color: #666;
+  line-height: 1.6;
+}
+
+.product-detail .actions {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.back-btn,
+.all-products-link {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-btn {
+  background: #6c757d;
+  color: white;
+  border: none;
+}
+
+.back-btn:hover {
+  background: #5a6268;
+}
+
+.all-products-link {
+  background: #667eea;
+  color: white;
+}
+
+.all-products-link:hover {
+  background: #5a6fd6;
+}
+
+/* Contact form */
+.contact form {
+  max-width: 500px;
+}
+
+.contact form div {
+  margin-bottom: 1rem;
+}
+
+.contact label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.contact input,
+.contact textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.contact input:focus,
+.contact textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.contact textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.contact button {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.contact button:hover {
+  background: #5a6fd6;
+}
+
+.contact button:disabled {
+  background: #adb5bd;
+  cursor: not-allowed;
+}
+
+/* Not found page */
+.not-found {
+  text-align: center;
+  padding: 3rem;
+}
+
+.not-found h1 {
+  font-size: 3rem;
+  color: #dc3545;
+}
+
+/* Links in content */
+.page a:not(.back-btn):not(.all-products-link) {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.page a:not(.back-btn):not(.all-products-link):hover {
+  text-decoration: underline;
+}
+
+/* Error message */
+.error-message {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}

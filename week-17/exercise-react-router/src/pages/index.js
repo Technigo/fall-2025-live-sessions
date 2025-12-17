@@ -1,0 +1,9 @@
+// Barrel export for all pages
+export { Home } from "./Home";
+export { About } from "./About";
+export { Contact } from "./Contact";
+export { Products } from "./Products";
+export { ProductDetail } from "./ProductDetail";
+export { Search } from "./Search";
+export { Dashboard } from "./Dashboard";
+export { NotFound } from "./NotFound";
