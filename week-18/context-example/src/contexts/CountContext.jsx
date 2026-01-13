@@ -1,23 +1,33 @@
-import { createContext, useState } from "react"
+import { createContext, useState, useContext } from "react";
 
-export const CountContext = createContext()
+export const CountContext = createContext();
 
 export const CountProvider = ({ children }) => {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
-  const increment = () => setCount(prev => prev + 1)
-  const decrement = () => setCount(prev => prev - 1)
+  const increment = () => setCount((prev) => prev + 1);
+  const decrement = () => setCount((prev) => prev - 1);
   const doubleIfEven = () => {
     if (count % 2 === 0) {
-      setCount(count * 2)
+      setCount(count * 2);
     } else {
-      console.log("This is odd, so not doubling")
+      console.log("This is odd, so not doubling");
     }
-  }
+  };
 
   return (
-    <CountContext.Provider value={{ count, increment, decrement, doubleIfEven }}>
+    <CountContext.Provider
+      value={{ count, increment, decrement, doubleIfEven }}
+    >
       {children}
     </CountContext.Provider>
-  )
-}
+  );
+};
+
+export const useCountContext = () => {
+  const context = useContext(CountContext);
+  if (!context) {
+    throw new Error("useCountContext must be used within a CountProvider");
+  }
+  return context;
+};

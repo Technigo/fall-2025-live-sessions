@@ -1,9 +1,7 @@
-import { useContext } from "react"
-
-import { CountContext } from "../contexts/CountContext"
+import { useCountContext } from "../contexts/CountContext";
 
 export const Count = () => {
-  const { count, increment, decrement, doubleIfEven } = useContext(CountContext)
+  const { count, increment, decrement, doubleIfEven } = useCountContext();
 
   return (
     <section className="light">
@@ -13,5 +11,5 @@ export const Count = () => {
       <button onClick={decrement}>Decrement</button>
       <button onClick={doubleIfEven}>Double if even</button>
     </section>
-  )
-}
+  );
+};
