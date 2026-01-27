@@ -2,7 +2,15 @@ import express from "express";
 import cors from "cors";
 import listEndpoints from "express-list-endpoints";
 
-import flowerData from "./data/flowers.json" with { type: "json" };
+import flowerJson from "./data/flowers.json" with { type: "json" };
+
+// hacky in-memory database
+let flowerData = flowerJson;
+
+// how to import large files:
+// import { readFileSync } from 'fs'
+// const jsonFile = readFileSync('./data/flowers.json', 'utf8')
+// const flowerData = JSON.parse(jsonFile)
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -59,6 +67,50 @@ app.get("/flowers/:id", (req, res) => {
       .status(404)
       .json({ error: `flower with id ${id} does not exist` });
   }
+
+  res.json(flower);
+});
+
+app.post("/flowers", (req, res) => {
+  const body = req.body;
+
+  // 1. validation on the body that we will add to the DB.
+  // 2. if the validation does not go through, then respond with an error.
+  // 3. create a unique ID, not just take the length of the db entries.
+
+  const newFlower = {
+    id: flowerData.length + 1,
+    name: body.name,
+    scientificName: body.scientificName,
+    botanicalFamily: body.botanicalFamily,
+    color: body.color,
+    isSpotted: body.isSpotted,
+    scent: body.scent,
+    size: body.size,
+    symbolism: body.symbolism,
+    lastSpottedTimestamp: body.lastSpottedTimestamp,
+  };
+
+  flowerData.push(newFlower);
+
+  res.json(newFlower);
+});
+
+app.delete("/flowers/:id", (req, res) => {
+  const id = req.params.id;
+  const flower = flowerData.find((flower) => Number(flower.id) === Number(id));
+
+  if (!flower) {
+    return res
+      .status(404)
+      .json({ error: `flower with id ${id} does not exist` });
+  }
+
+  const newFlowers = flowerData.filter(
+    (flower) => Number(flower.id) !== Number(id),
+  );
+
+  flowerData = newFlowers;
 
   res.json(flower);
 });
