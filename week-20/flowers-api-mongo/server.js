@@ -48,7 +48,7 @@ const flowerSchema = new mongoose.Schema({
 const Flower = mongoose.model("Flower", flowerSchema);
 
 // TODO: Add seeding of DB
-if (process.env.RESET_DB) {
+if (process.env.RESET_DB === "true") {
   const seedDatabase = async () => {
     await Flower.deleteMany();
 
@@ -114,27 +114,11 @@ app.get("/flowers", async (req, res) => {
       message: error,
     });
   }
-
-  // let filteredFlowers = flowerData;
-  // if (color) {
-  //   filteredFlowers = filteredFlowers.filter((flower) => {
-  //     return flower.color.toLowerCase() === color.toLowerCase();
-  //   });
-  // }
-  // if (symbol) {
-  //   filteredFlowers = filteredFlowers.filter((flower) => {
-  //     return flower.symbolism.some((word) => {
-  //       return word.toLowerCase() === symbol.toLowerCase();
-  //     });
-  //   });
-  // }
-  // res.json(filteredFlowers);
 });
 
 // TODO: Add Flower findById
 app.get("/flowers/:id", async (req, res) => {
   const id = req.params.id;
-  console.log("id", id);
 
   try {
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -167,18 +151,12 @@ app.get("/flowers/:id", async (req, res) => {
       message: error,
     });
   }
-
-  // if (!flower) {
-  //   return res
-  //     .status(404)
-  //     .json({ error: `flower with id ${id} does not exist` });
-  // }
-  // res.json(flower);
 });
 
 // TODO: Create new Flower and save()
 app.post("/flowers", async (req, res) => {
   const body = req.body;
+  console.log("body", body);
 
   try {
     const newFlower = {
@@ -192,6 +170,7 @@ app.post("/flowers", async (req, res) => {
       symbolism: body.symbolism,
       lastSpottedTimestamp: body.lastSpottedTimestamp,
     };
+    console.log("newFlower", newFlower);
 
     const createdFlower = await new Flower(newFlower).save();
 
@@ -207,9 +186,6 @@ app.post("/flowers", async (req, res) => {
       message: error,
     });
   }
-
-  // flowerData.push(newFlower);
-  // res.json(newFlower);
 });
 
 // TODO: Add deleteOne() by id (_id)
