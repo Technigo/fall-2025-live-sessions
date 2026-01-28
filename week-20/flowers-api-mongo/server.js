@@ -57,6 +57,7 @@ if (process.env.RESET_DB) {
     });
   };
 
+  console.log("seeding database");
   seedDatabase();
 }
 
@@ -136,6 +137,14 @@ app.get("/flowers/:id", async (req, res) => {
   console.log("id", id);
 
   try {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        success: false,
+        response: null,
+        message: "Invalid ID format",
+      });
+    }
+
     const flower = await Flower.findById(id);
 
     if (!flower) {
